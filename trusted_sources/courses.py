@@ -52,10 +52,12 @@ def youtube(keywords):
             title       = content["title"]["simpleText"]
             playlist_id = content["playlistId"]
 
-            url         = f"https://www.youtube.com/playlist?list={playlist_id}"
+            url_return         = f"https://www.youtube.com/playlist?list={playlist_id}"
             
-            return_data.append((title, url))
-            
+            return_data.append((title, url_return))
+
     
     return return_data
 
+
+print(youtube("c++"))
