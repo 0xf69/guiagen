@@ -3,6 +3,7 @@
 import sys
 import random
 from time import time
+from os.path import realpath
 from trusted_sources import books, courses
 
 
@@ -117,9 +118,11 @@ def main():
     markdown      = generate_markdown(data)
 
     if ("-s" in sys.argv) or ("--save" in sys.argv):
-        filename = f"./{topic}-{int(time())}.md"
+        path     = realpath(__file__).split('/')
+        path     = "/".join(path[:-1:])
+        filename = f"{path}/{topic}-{int(time())}.md"
         filename = filename.replace(' ', '_')
-    
+
         with open(filename, "x") as f:
             f.write(markdown)
     
