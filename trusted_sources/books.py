@@ -17,16 +17,17 @@ def google(keywords):
 
         for content in response:
             url_return   = re.search("\<a href=\"https://books.google.com\/books\?id=(.*?)&", content)
-            url_return   = url.group(1)
-            url_return   = f"https://www.google.com.br/books/edition/_/{url}" 
+            url_return   = url_return.group(1)
+            url_return   = f"https://www.google.com.br/books/edition/_/{url_return}" 
 
             title = re.search("\<h3 class=\".*?\"\>(.*?)\<\/h3\>", content)
             title = title.group(1)
+            title = title.title()
 
             if title.endswith("..."):
                 title = title[0:-3:]
 
-            return_data.append((title, url))
+            return_data.append((title, url_return))
 
 
     return return_data
@@ -43,12 +44,9 @@ def zlib(keywords):
         
         for content in response:
             url_return   = "https://b-ok.lat" + content[0]
-            title = content[1]
+            title = content[1].title()
 
             return_data.append((title, url_return))
 
 
     return return_data
-
-
-print(zlib(["python", "c++"]))

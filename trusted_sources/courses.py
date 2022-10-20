@@ -18,7 +18,8 @@ def udemy(keywords):
         courses  = response["courses"]
         
         for course in courses:
-            return_data.append((course["title"],\
+            title = course["title"].title()
+            return_data.append((title,\
                         "https://www.udemy.com" + course["url"]))
 
 
@@ -49,7 +50,7 @@ def youtube(keywords):
 
         for content in contents:
             content     = content["playlistRenderer"]
-            title       = content["title"]["simpleText"]
+            title       = content["title"]["simpleText"].title()
             playlist_id = content["playlistId"]
 
             url_return         = f"https://www.youtube.com/playlist?list={playlist_id}"
@@ -59,5 +60,3 @@ def youtube(keywords):
     
     return return_data
 
-
-print(youtube("c++"))
