@@ -61,8 +61,16 @@ def filter(keywords, db):
     
         index += 1
 
-    items_amount = random.randint(1, len(db2))
-    items        = random.sample(db2, items_amount)
+    items = []
+    names = []
+    for item in db2:
+        name = item[0]
+        if name not in names:
+            items.append(item)
+            names.append(name)
+
+    items_amount = random.randint(1, len(items))
+    items        = random.sample(items, items_amount)
     
     return items
 
@@ -84,14 +92,16 @@ def generate_markdown(data):
 
 
 def generate_subtopic(subtopic, format):
-    template = f"\n## {subtopic.title()}\n"
+    emoji_pool = ['📮', '📕', '💼', '🎙', '📮']
+    emoji      = random.choice(emoji_pool)
+    template   = f"\n## {emoji} {subtopic.title()}\n"
+
     for media in format:
         name = media[0]
         url  = media[1]
         line = f"* [{name}]({url})\n"
 
         template += line
-
 
     return template
         
